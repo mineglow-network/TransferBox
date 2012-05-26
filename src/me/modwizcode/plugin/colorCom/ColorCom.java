@@ -5,7 +5,6 @@
 package me.modwizcode.plugin.colorCom;
 
 import java.util.regex.Pattern;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -47,6 +46,13 @@ public class ColorCom extends JavaPlugin implements Listener{
         Pattern yellowColor = Pattern.compile("&e",Pattern.CASE_INSENSITIVE);
         Pattern whiteColor = Pattern.compile("&f",Pattern.CASE_INSENSITIVE);
         
+        Pattern magicColor = Pattern.compile("&k",Pattern.CASE_INSENSITIVE);
+	Pattern boldColor = Pattern.compile("&l",Pattern.CASE_INSENSITIVE);
+	Pattern strikeThroughColor = Pattern.compile("&m",Pattern.CASE_INSENSITIVE);
+	Pattern underlineColor = Pattern.compile("&n",Pattern.CASE_INSENSITIVE);
+	Pattern italicColor = Pattern.compile("&o",Pattern.CASE_INSENSITIVE);
+	Pattern resetColor = Pattern.compile("&r",Pattern.CASE_INSENSITIVE);
+        
         finishedProduct = blackColor.matcher(finishedProduct).replaceAll(ChatColor.BLACK.toString());
         finishedProduct = blueColor.matcher(finishedProduct).replaceAll(ChatColor.DARK_BLUE.toString());
         finishedProduct = greenColor.matcher(finishedProduct).replaceAll(ChatColor.DARK_GREEN.toString());
@@ -62,6 +68,13 @@ public class ColorCom extends JavaPlugin implements Listener{
         finishedProduct = lightPurpleColor.matcher(finishedProduct).replaceAll(ChatColor.LIGHT_PURPLE.toString());
         finishedProduct = yellowColor.matcher(finishedProduct).replaceAll(ChatColor.YELLOW.toString());
         finishedProduct = whiteColor.matcher(finishedProduct).replaceAll(ChatColor.WHITE.toString());
+        
+        finishedProduct = magicColor.matcher(finishedProduct).replaceAll(ChatColor.MAGIC.toString());
+        finishedProduct = boldColor.matcher(finishedProduct).replaceAll(ChatColor.BOLD.toString());
+        finishedProduct = strikeThroughColor.matcher(finishedProduct).replaceAll(ChatColor.STRIKETHROUGH.toString());
+        finishedProduct = underlineColor.matcher(finishedProduct).replaceAll(ChatColor.UNDERLINE.toString());
+        finishedProduct = italicColor.matcher(finishedProduct).replaceAll(ChatColor.ITALIC.toString());
+        finishedProduct = resetColor.matcher(finishedProduct).replaceAll(ChatColor.RESET.toString());
         
         event.setMessage(finishedProduct);
     }
