@@ -13,13 +13,13 @@ import org.bukkit.plugin.java.JavaPlugin;
  *
  * @author Starbuck Johnson
  */
-public class TransferBox extends JavaPlugin implements Listener{
+public class TransferBox extends JavaPlugin {
     
     TransferCommands tc;
     @Override
     public void onEnable() {
         tc = new TransferCommands(this);
-        this.getPluginLoader().createRegisteredListeners(this, new TransferListener());
+        this.getPluginLoader().createRegisteredListeners(new TransferListener(), this);
     }
     
     public void onDiable() {

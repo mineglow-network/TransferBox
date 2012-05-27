@@ -16,7 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  *
  * @author Starbuck Johnson
  */
-public class TransferListener extends JavaPlugin{
+public class TransferListener extends JavaPlugin implements Listener{
     
     @EventHandler
     public void OnInventoryOpen(InventoryOpenEvent event) {
