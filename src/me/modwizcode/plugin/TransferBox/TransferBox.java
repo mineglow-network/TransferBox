@@ -19,7 +19,7 @@ public class TransferBox extends JavaPlugin {
     @Override
     public void onEnable() {
         tc = new TransferCommands(this);
-        getServer().getPluginManager().registerEvents(new TransferListener(), this);
+        this.getPluginLoader().createRegisteredListeners(new TransferListener(), this);
     }
     
     public void onDiable() {
