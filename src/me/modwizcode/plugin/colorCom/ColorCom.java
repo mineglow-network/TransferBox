@@ -34,6 +34,7 @@ public class ColorCom extends JavaPlugin implements Listener{
         Pattern blueColor = Pattern.compile("&1",Pattern.CASE_INSENSITIVE);
         Pattern greenColor = Pattern.compile("&2",Pattern.CASE_INSENSITIVE);
         Pattern darkAquaColor = Pattern.compile("&3",Pattern.CASE_INSENSITIVE);
+        Pattern darkRedcolor = Pattern.compile("&4",Pattern.CASE_INSENSITIVE);
         Pattern purpleColor = Pattern.compile("&5",Pattern.CASE_INSENSITIVE);
         Pattern orangeColor = Pattern.compile("&6",Pattern.CASE_INSENSITIVE);
         Pattern greyColor = Pattern.compile("&7",Pattern.CASE_INSENSITIVE);
@@ -57,6 +58,7 @@ public class ColorCom extends JavaPlugin implements Listener{
         finishedProduct = blueColor.matcher(finishedProduct).replaceAll(ChatColor.DARK_BLUE.toString());
         finishedProduct = greenColor.matcher(finishedProduct).replaceAll(ChatColor.DARK_GREEN.toString());
         finishedProduct = darkAquaColor.matcher(finishedProduct).replaceAll(ChatColor.DARK_AQUA.toString());
+        finishedProduct = darkRedColor.matcher(finishedProduct).replaceAll(ChatColor.DARK_RED.toString());
         finishedProduct = purpleColor.matcher(finishedProduct).replaceAll(ChatColor.DARK_PURPLE.toString());
         finishedProduct = orangeColor.matcher(finishedProduct).replaceAll(ChatColor.GOLD.toString());
         finishedProduct = greyColor.matcher(finishedProduct).replaceAll(ChatColor.GRAY.toString());
