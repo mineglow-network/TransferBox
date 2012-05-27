@@ -4,6 +4,7 @@
  */
 package me.modwizcode.plugin.TransferBox;
 
+import java.util.HashMap;
 import java.util.Map;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -22,7 +23,8 @@ import org.bukkit.inventory.InventoryHolder;
  */
 public class TransferCommands {
     private TransferBox plug;
-    private Map<Player,Inventory> inv;
+    private Map<Player,Inventory> inv = new HashMap<Player,Inventory>();
+    private Map<Player,Block> invb = new HashMap<Player,Block>();
     
     public TransferCommands(TransferBox plug) {
         this.plug = plug;
@@ -69,47 +71,50 @@ public class TransferCommands {
             Location chestLocation = selectedChest.getLocation();
             Location left, right, front, back;
             
-            boolean doubleChest = false;
-            left = chestLocation.add(-1.0d, 0.0d, 0.0d);
-            right = chestLocation.add(1.0d, 0.0d, 0.0d);
-            front = chestLocation.add(0.0d, 0.0d, 1.0d);
-            back = chestLocation.add(0.0d, 0.0d, -1.0d);
-            if (left.getBlock().getType().equals(Material.CHEST) ){
-                doubleChest = true;
-            }
             
-            if (right.getBlock().getType().equals(Material.CHEST) ){
-                doubleChest = true;
-            }
             
-            if (front.getBlock().getType().equals(Material.CHEST) ){
-                doubleChest = true;
-            }
-            
-            if (back.getBlock().getType().equals(Material.CHEST) ){
-                doubleChest = true;
-            }
-            if (doubleChest == true) {
-                DoubleChest itemChest = (DoubleChest) selectedChest.getState();
                 
-                inv.put(sender, itemChest.getInventory());
-            }
-            
-            if (doubleChest == false) {
-                Chest itemChest = (Chest) selectedChest.getState();
+                try {
+                    DoubleChest itemChest = (DoubleChest) selectedChest.getState();
+                    inv.put(sender, itemChest.getInventory());
+                invb.put(sender,selectedChest);
+                } catch(ClassCastException e) {
+                    Chest itemChest = (Chest) selectedChest.getState();
+                    inv.put(sender, itemChest.getInventory());
+                invb.put(sender,selectedChest);
+                }
                 
-                inv.put(sender, itemChest.getInventory());
-            }
+            
+            
+           
+                
+                
+               
+            
             
         }
         return true;
     }
     
     private boolean doCreate(Player sender, Command command, String label, String[] args) {
+        if (inv.containsKey(sender)) {
+            if (!args[1].isEmpty()) {
+                String groupName = args[1];
+                TransferStorage.chestInventories.put(groupName, inv.get(sender));
+                TransferStorage.chestBlocks.put(invb.get(sender),groupName);
+            }
+        }
         return true;
     }
     
     private boolean doAdd(Player sender, Command command, String label, String[] args) {
+        if (inv.get(sender) != null) {
+            if (!args[1].isEmpty()) {
+                String groupName = args[1];
+                
+                TransferStorage.chestBlocks.put(invb.get(sender),groupName);
+            }
+        }
         return true;
     }
     
