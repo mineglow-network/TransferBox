@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 name: TransferBox
 main: me.modwizcode.plugin.TransferBox.TransferBox
 version: 1.0
@@ -6,9 +5,3 @@ commands:
   tb:
     description: This is the main command for TransferBox.
     usage: /command select/create <name>/add
-    
-=======
-name: colorCom
-main: me.modwizcode.plugin.colorCom.ColorCom
-version: 1.1
->>>>>>> branch 'master' of https://github.com/modwizcode/ColoredCom.git
