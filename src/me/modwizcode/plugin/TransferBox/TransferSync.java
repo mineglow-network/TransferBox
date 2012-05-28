@@ -5,16 +5,10 @@
 package me.modwizcode.plugin.TransferBox;
 
 import com.onarandombox.multiverseinventories.MultiverseInventories;
-import com.onarandombox.multiverseinventories.api.profile.PlayerProfile;
 import com.onarandombox.multiverseinventories.api.profile.WorldGroupProfile;
-import com.onarandombox.multiverseinventories.api.share.ProfileEntry;
-import com.onarandombox.multiverseinventories.api.share.Sharable;
-import com.onarandombox.multiverseinventories.api.share.SharableHandler;
-import com.onarandombox.multiverseinventories.api.share.Sharables;
 import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
 /**
@@ -33,11 +27,14 @@ public class TransferSync {
             
         }
     }
-    public void sync(String name, Inventory inventory) {
-        if (hasMultiInv()) {
-            
-        } else {
-            
+    public static void sync(String name, Inventory chest, TransferState state) {
+        switch (state) {
+            case OPEN:
+                    chest.setContents(TransferStorage.chestInventories.get(name).getContents());
+                    break;
+            case CLOSE:
+                    TransferStorage.chestInventories.put(name, chest);
+                
         }
         
     }
@@ -53,12 +50,16 @@ public class TransferSync {
         return (MultiverseInventories)Bukkit.getPluginManager().getPlugin("Multiverse-Inventories");
     }
     
-    private static boolean isSharing(World world) {
+    private static boolean isSharing(World world,World secondWorld) {
         List<WorldGroupProfile> groups = getMultiInv().getGroupManager().getGroupsForWorld(world.getName());
+        List<WorldGroupProfile> groups2 = getMultiInv().getGroupManager().getGroupsForWorld(secondWorld.getName());
         for (WorldGroupProfile i: groups) {
-            if (i.isSharing(TransferSharable.TB)) {
-                return true;
+            for (WorldGroupProfile j: groups2) {
+                if (i.equals(j) && i.isSharing(TransferSharable.TB)) {
+                    return true;
+                }
             }
+           
         }
             
         return false;

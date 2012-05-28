@@ -4,7 +4,6 @@
  */
 package me.modwizcode.plugin.TransferBox;
 
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -22,9 +21,11 @@ public class TransferListener extends JavaPlugin implements Listener{
     public void OnInventoryOpen(InventoryOpenEvent event) {
        
         if (event.getView().getType() == InventoryType.CHEST) {
+            
             if (TransferStorage.chestBlocks.get(event.getPlayer().getTargetBlock(null, 10))!=null) {
+                
                 String groupName = TransferStorage.chestBlocks.get(event.getPlayer().getTargetBlock(null, 10));
-                event.getView().getTopInventory().setContents(TransferStorage.chestInventories.get(groupName).getContents());
+                TransferSync.sync(groupName, event.getView().getTopInventory(), TransferState.OPEN);
             }
         }
         
@@ -32,10 +33,14 @@ public class TransferListener extends JavaPlugin implements Listener{
     
     @EventHandler
     public void OnInventoryClose(InventoryCloseEvent event) {
+        
         if (event.getView().getType() == InventoryType.CHEST) {
+            
             if (TransferStorage.chestBlocks.get(event.getPlayer().getTargetBlock(null, 10))!=null) {
+                
                 String groupName = TransferStorage.chestBlocks.get(event.getPlayer().getTargetBlock(null, 10));
-                TransferStorage.chestInventories.put(groupName,event.getView().getTopInventory());
+                TransferSync.sync(groupName, event.getView().getTopInventory(), TransferState.CLOSE);
+                
             }
         }
     }

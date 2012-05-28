@@ -4,10 +4,15 @@
  */
 package me.modwizcode.plugin.TransferBox;
 
+import com.onarandombox.multiverseinventories.api.GroupManager;
+import com.onarandombox.multiverseinventories.api.profile.WorldGroupProfile;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.block.DoubleChest;
@@ -15,7 +20,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
 
 /**
  *
@@ -102,6 +106,7 @@ public class TransferCommands {
                 String groupName = args[1];
                 TransferStorage.chestInventories.put(groupName, inv.get(sender));
                 TransferStorage.chestBlocks.put(invb.get(sender),groupName);
+                
             }
         }
         return true;
@@ -112,7 +117,9 @@ public class TransferCommands {
             if (!args[1].isEmpty()) {
                 String groupName = args[1];
                 
-                TransferStorage.chestBlocks.put(invb.get(sender),groupName);
+                    TransferStorage.chestBlocks.put(invb.get(sender),groupName);
+                
+               
             }
         }
         return true;
