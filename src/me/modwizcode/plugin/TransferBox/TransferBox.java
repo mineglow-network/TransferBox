@@ -20,8 +20,9 @@ public class TransferBox extends JavaPlugin {
     @Override
     public void onEnable() {
         tc = new TransferCommands(this);
-       
+        TransferSharable.init();
         TransferSync.onEnable();
+        
         getServer().getPluginManager().registerEvents(new TransferListener(), this);
     }
     

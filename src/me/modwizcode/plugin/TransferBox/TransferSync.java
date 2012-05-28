@@ -28,7 +28,7 @@ public class TransferSync {
         if (hasMultiInv()) {
             Bukkit.getLogger().info("hello 3");
             TransferSharable.init();
-            if (isSharing(Bukkit.getWorld("World One"))) {
+            if (isSharing(Bukkit.getWorlds().get(0))) {
                 Bukkit.getLogger().info("hello");
             }
         } else {
@@ -44,14 +44,14 @@ public class TransferSync {
         
     }
     
-    private static boolean hasMultiInv() {
+    public static boolean hasMultiInv() {
         if (Bukkit.getPluginManager().isPluginEnabled("Multiverse-Inventories")) {
             return true;
         }
         return false;
     }
     
-    private static MultiverseInventories getMultiInv() {
+    public static MultiverseInventories getMultiInv() {
         return (MultiverseInventories)Bukkit.getPluginManager().getPlugin("Multiverse-Inventories");
     }
     

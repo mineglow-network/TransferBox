@@ -26,6 +26,7 @@ public class TransferListener extends JavaPlugin implements Listener{
                 event.getView().getTopInventory().setContents(TransferStorage.chestInventories.get(groupName).getContents());
             }
         }
+        
     }
     
     @EventHandler
