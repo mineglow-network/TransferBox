@@ -20,6 +20,7 @@ public class TransferListener extends JavaPlugin implements Listener{
     
     @EventHandler
     public void OnInventoryOpen(InventoryOpenEvent event) {
+       
         if (event.getView().getType() == InventoryType.CHEST) {
             if (TransferStorage.chestBlocks.get(event.getPlayer().getTargetBlock(null, 10))!=null) {
                 String groupName = TransferStorage.chestBlocks.get(event.getPlayer().getTargetBlock(null, 10));
