@@ -26,7 +26,8 @@ public class TransferSync {
     
     public static void onEnable() {
         if (hasMultiInv()) {
-            
+            Bukkit.getLogger().info("hello 3");
+            TransferSharable.init();
             if (isSharing(Bukkit.getWorld("World One"))) {
                 Bukkit.getLogger().info("hello");
             }
