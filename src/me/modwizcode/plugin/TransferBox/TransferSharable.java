@@ -18,6 +18,9 @@ import org.bukkit.entity.Player;
  */
 public class TransferSharable  {
 
+    public static void init() {
+        
+    }
     public static final Sharable<Double> TB = new Sharable.Builder<Double>("transferbox", Double.class,
             new SharableHandler<Double>() {
                 @Override
