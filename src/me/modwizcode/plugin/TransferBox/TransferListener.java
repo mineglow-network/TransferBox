@@ -33,7 +33,6 @@ public class TransferListener extends JavaPlugin implements Listener{
     public void OnInventoryClose(InventoryCloseEvent event) {
         if (event.getView().getType() == InventoryType.CHEST) {
             if (TransferStorage.chestBlocks.get(event.getPlayer().getTargetBlock(null, 10))!=null) {
-                Bukkit.getLogger().info("Toda");
                 String groupName = TransferStorage.chestBlocks.get(event.getPlayer().getTargetBlock(null, 10));
                 TransferStorage.chestInventories.put(groupName,event.getView().getTopInventory());
             }
