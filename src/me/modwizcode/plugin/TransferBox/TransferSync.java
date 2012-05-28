@@ -4,6 +4,17 @@
  */
 package me.modwizcode.plugin.TransferBox;
 
+import com.onarandombox.multiverseinventories.MultiverseInventories;
+import com.onarandombox.multiverseinventories.api.profile.PlayerProfile;
+import com.onarandombox.multiverseinventories.api.profile.WorldGroupProfile;
+import com.onarandombox.multiverseinventories.api.share.ProfileEntry;
+import com.onarandombox.multiverseinventories.api.share.Sharable;
+import com.onarandombox.multiverseinventories.api.share.SharableHandler;
+import com.onarandombox.multiverseinventories.api.share.Sharables;
+import java.util.List;
+import org.bukkit.Bukkit;
+import org.bukkit.World;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
 /**
@@ -11,7 +22,46 @@ import org.bukkit.inventory.Inventory;
  * @author Starbuck Johnson
  */
 public class TransferSync {
-    public void sync(String name) {
+    
+    
+    public static void onEnable() {
+        if (hasMultiInv()) {
+            
+            if (isSharing(Bukkit.getWorld("World One"))) {
+                Bukkit.getLogger().info("hello");
+            }
+        } else {
+            
+        }
+    }
+    public void sync(String name, Inventory inventory) {
+        if (hasMultiInv()) {
+            
+        } else {
+            
+        }
         
+    }
+    
+    private static boolean hasMultiInv() {
+        if (Bukkit.getPluginManager().isPluginEnabled("Multiverse-Inventories")) {
+            return true;
+        }
+        return false;
+    }
+    
+    private static MultiverseInventories getMultiInv() {
+        return (MultiverseInventories)Bukkit.getPluginManager().getPlugin("Multiverse-Inventories");
+    }
+    
+    private static boolean isSharing(World world) {
+        List<WorldGroupProfile> groups = getMultiInv().getGroupManager().getGroupsForWorld(world.getName());
+        for (WorldGroupProfile i: groups) {
+            if (i.isSharing(TransferSharable.TB)) {
+                return true;
+            }
+        }
+            
+        return false;
     }
 }

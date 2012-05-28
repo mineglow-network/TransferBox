@@ -16,9 +16,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class TransferBox extends JavaPlugin {
     
     TransferCommands tc;
+    
     @Override
     public void onEnable() {
         tc = new TransferCommands(this);
+       
+        TransferSync.onEnable();
         getServer().getPluginManager().registerEvents(new TransferListener(), this);
     }
     
