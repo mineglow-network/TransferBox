@@ -151,12 +151,19 @@ public class TransferCommands {
                             
                             // Store this chest and its group for syncing.
                             TransferStorage.chestBlocks.put(invb.get(sender),groupName);
+                            
+                            // Store the world in the list of synced worlds for this group.
+                            TransferStorage.groupWorlds.put(groupName,tempWorlds);
+                            
                         }
                     } else {
                         // The server does not have multiverse inventories.
                         
                         // Store this chest and its group for syncing.
                         TransferStorage.chestBlocks.put(invb.get(sender),groupName);
+                        
+                        // Store the world in the list of synced worlds for this group.
+                        TransferStorage.groupWorlds.put(groupName,tempWorlds);
                     }
                     
             }
