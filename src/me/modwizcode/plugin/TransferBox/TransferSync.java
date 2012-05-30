@@ -5,8 +5,9 @@
 package me.modwizcode.plugin.TransferBox;
 
 import com.onarandombox.multiverseinventories.MultiverseInventories;
+import com.onarandombox.multiverseinventories.api.GroupManager;
 import com.onarandombox.multiverseinventories.api.profile.WorldGroupProfile;
-import java.util.List;
+import java.util.*;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.inventory.Inventory;
@@ -23,6 +24,8 @@ public class TransferSync {
             
             TransferSharable.init();
             getMultiInv().reloadConfig();
+            
+            
         } else {
             
         }
@@ -34,7 +37,7 @@ public class TransferSync {
                     break;
             case CLOSE:
                     TransferStorage.chestInventories.put(name, chest);
-                
+                    break;
         }
         
     }
@@ -50,18 +53,35 @@ public class TransferSync {
         return (MultiverseInventories)Bukkit.getPluginManager().getPlugin("Multiverse-Inventories");
     }
     
-    private static boolean isSharing(World world,World secondWorld) {
-        List<WorldGroupProfile> groups = getMultiInv().getGroupManager().getGroupsForWorld(world.getName());
-        List<WorldGroupProfile> groups2 = getMultiInv().getGroupManager().getGroupsForWorld(secondWorld.getName());
-        for (WorldGroupProfile i: groups) {
-            for (WorldGroupProfile j: groups2) {
-                if (i.equals(j) && i.isSharing(TransferSharable.TB)) {
-                    return true;
+    public static boolean isSharing(List<World> worlds) {
+        Map<World,List<WorldGroupProfile>> worldProfiles =  new HashMap<World,List<WorldGroupProfile>>();
+        for (World i: worlds) {
+            List<WorldGroupProfile> profiles = getMultiInv().getGroupManager().getGroupsForWorld(i.getName());
+            worldProfiles.put(i, profiles);
+        }
+        
+        Map<String,Set<String>> profiles = new HashMap<String,Set<String>>();
+        List<String> worldNames= new ArrayList<String>();
+        for (World i: worlds) {
+            List<WorldGroupProfile> temp = worldProfiles.get(i);
+            for (WorldGroupProfile j: temp) {
+                
+                if (!profiles.containsKey(j.getName())) {
+                    Set<String> worldList = j.getWorlds();
+                    profiles.put(j.getName(), worldList);
                 }
             }
-           
         }
-            
+        for (World i: worlds) {
+            worldNames.add(i.getName());
+        }
+        for (String i: profiles.keySet()) {
+            if (profiles.get(i).containsAll(worldNames)) {
+                return true;
+            }
+        }
+        
+       
         return false;
     }
 }

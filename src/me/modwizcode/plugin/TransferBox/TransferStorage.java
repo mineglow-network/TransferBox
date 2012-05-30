@@ -16,7 +16,14 @@ import org.bukkit.inventory.Inventory;
  * @author Starbuck Johnson
  */
 public class TransferStorage {
+    
+    // Group Inventory that is to be shared
     public static Map<String, Inventory> chestInventories = new HashMap<String, Inventory>();
+    
+    // Get the group for a peticular block.
     public static Map<Block, String> chestBlocks = new HashMap<Block,String>();
+    
+    // Get the worlds that a group contains.
     public static Map<String, List<World>> groupWorlds = new HashMap<String,List<World>>();
+    
 }
