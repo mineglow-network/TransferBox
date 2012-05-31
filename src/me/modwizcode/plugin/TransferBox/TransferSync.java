@@ -67,8 +67,11 @@ public class TransferSync {
             for (WorldGroupProfile j: temp) {
                 
                 if (!profiles.containsKey(j.getName())) {
-                    Set<String> worldList = j.getWorlds();
-                    profiles.put(j.getName(), worldList);
+                    
+                    if (j.isSharing(TransferSharable.TB)) {
+                        profiles.put(j.getName(), worldList);
+                        Set<String> worldList = j.getWorlds();
+                    }
                 }
             }
         }
@@ -76,6 +79,7 @@ public class TransferSync {
             worldNames.add(i.getName());
         }
         for (String i: profiles.keySet()) {
+            
             if (profiles.get(i).containsAll(worldNames)) {
                 return true;
             }
