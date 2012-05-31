@@ -69,8 +69,9 @@ public class TransferSync {
                 if (!profiles.containsKey(j.getName())) {
                     
                     if (j.isSharing(TransferSharable.TB)) {
-                        profiles.put(j.getName(), worldList);
                         Set<String> worldList = j.getWorlds();
+                        profiles.put(j.getName(), worldList);
+                        
                     }
                 }
             }
